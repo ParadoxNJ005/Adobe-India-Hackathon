@@ -16,5 +16,8 @@ COPY . .
 # Ensure output directory exists
 RUN mkdir -p /app/Output
 
+# Download and save the SentenceTransformer model during build
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2').save('all-MiniLM-L6-v2-local')"
+
 # Entrypoint: process all PDFs in /app/input and save results to /app/output
-CMD ["python","1A.py", "file03.pdf "]
+CMD ["python", "1A.py", "file03.pdf"]
